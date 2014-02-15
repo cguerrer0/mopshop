@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:wc="http://googlecode.com/wickedcharts"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+
+<h:head>
+	<title><h:outputText value="#{i18n['welcome.head.title']}" /></title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/pages/template/layout.xhtml">
+		<ui:define name="content">
+			<script
+				src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+			<script src="http://code.highcharts.com/highcharts.js"></script>
+			<h3>
+				<h:outputText value="#{i18n['welcome.content.title']}" />
+			</h3>
+			<h4>
+				<h:dataTable value="#{welcomeBean.retrieveList()}" var="hello">
+					<h:column>#{hello.firstName}</h:column>
+					<h:column>#{hello.lastName}</h:column>
+				</h:dataTable>
+				<br />
+				<rich:panel style="width:525px">
+				<f:facet name="header">
+				Column Chart
+				</f:facet>
+		       <wc:chart id="chart1" options="#{welcomeBean.options}" theme="#{welcomeBean.myTheme}" />
+		       
+		        </rich:panel>
+				<h:link outcome="home">
+					<h:outputText value="#{i18n['welcome.content.link_home']}" />
+				</h:link>
+			</h4>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

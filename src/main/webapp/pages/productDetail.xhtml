@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <body>
+      <h:head>
+	<title><h:outputText value="#{i18n['home.head.title']}" /></title>
+	</h:head>
+
+        <ui:composition template="/pages/template/layout.xhtml">
+         
+
+            <ui:define name="content">
+                <h:panelGroup styleClass="dataPanel">
+                    <h3> <h:outputText value="Product Detail"/> </h3>
+
+                    <h:panelGrid frame="box" border="1" columns="2">
+
+                        <h:outputLabel value="#{i18n['product.description']}" for="description" style="font-weight: bold;"/>
+                        <h:outputText id="descripcion" value="#{catalogBean.currentProduct.description}"/>
+
+                       <h:outputLabel value="#{i18n['product.brand']}:" for="marca" style="font-weight: bold;"/>
+                        <h:outputText id="marca" value="#{catalogBean.currentProduct.brand}"/>
+
+                        <h:outputLabel value="#{i18n['product.model']}:" for="modelo" style="font-weight: bold;"/>
+                        <h:outputText id="modelo" value="#{catalogBean.currentProduct.model}"/>
+
+                        <h:outputLabel value="#{i18n['product.family']}:" for="familia" style="font-weight: bold;"/>
+                        <h:outputText id="familia" value="#{catalogBean.currentProduct.family.name}"/>
+
+                        <h:outputLabel value="#{i18n['product.detail']}:" for="detalle" style="font-weight: bold;"/>
+                        <h:inputTextarea id="detalle" cols="50" rows="6" readonly="true" value="#{catalogBean.currentProduct.detail}"/>
+
+                        <h:outputLabel value="#{i18n['product.price']}:" for="precio" style="font-weight: bold;"/>
+                        <h:outputText id="precio" value="#{catalogBean.currentProduct.price}"/>
+
+                        <h:outputLabel value="#{i18n['product.stock']}:" for="disponibilidad" style="font-weight: bold;"/>
+                        <h:outputText value="#{i18n['product.in_stock']}" rendered="#{catalogBean.currentProduct.stock > 0}"/>
+                        <h:outputText value="#{i18n['product.no_available']}" rendered="#{catalogBean.currentProduct.stock == 0}"/>
+
+                    </h:panelGrid>
+                </h:panelGroup>
+
+                <h:commandButton value="#{i18n['common.return']}" immediate="true" onclick="history.back()"/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

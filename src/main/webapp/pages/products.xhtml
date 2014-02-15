@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+   
+
+	<ui:composition template="/pages/template/layout.xhtml">
+
+		<ui:define name="content">
+
+                <h:form>
+                    <h3>
+                        <h:outputText value="#{i18n['product.list']}"/>
+                    </h3>
+
+                     <h3>
+                        <h:outputText value="#{catalogBean.currentFamily.name}"
+                                      rendered="#{catalogBean.currentFamily != null}"/>
+                    </h3>
+                    <h2>
+                        <h:outputText value="#{i18n['product.any_product_to_show']}"
+                                      rendered="#{empty catalogBean.products}" />
+                    </h2>
+
+                    <h:dataTable value="#{catalogBean.products}" var="product"
+                                 rendered="#{not empty catalogBean.products}"
+                                 border="0" cellpadding="4" cellspacing="0" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['product.family']}"/>
+                            </f:facet>
+                            <h:outputText value="#{product.family.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{product.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['product.description']}"/>
+                            </f:facet>
+                            <h:commandLink action="#{catalogBean.doCheckCurrentProduct(product.id)}"
+                                           value="#{product.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['product.brand']}"/>
+                            </f:facet>
+                            <h:outputText value="#{product.brand}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['product.model']}"/>
+                            </f:facet>
+                            <h:outputText value="#{product.model}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['product.price']}"/>
+                            </f:facet>
+                            <h:outputText value="#{product.price}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink action="#{shoppingCartBean.doAddProduct(product.id)}"
+                                           value="#{i18n['product.add_shopping_cart']}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

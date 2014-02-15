@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+    	<ui:composition template="/pages/template/layout.xhtml">
+
+		<ui:define name="content">
+		
+                <h3> <h:outputText value="#{i18n['order.success_order']}"/></h3>
+
+                <h:form>
+                    <h:panelGroup styleClass="dataPanel">
+                        <p> <h:outputText value="#{i18n['client.data']}" style="font-weight: bold;"/> </p>
+
+                        <h:panelGrid frame="box" border="1" columns="2">
+                            <h:outputLabel value="#{i18n['commun.name']}:" for="nombre" style="font-weight: bold;"/>
+                            <h:outputText id="nombre" value="#{shoppingCartBean.order.customer.name}"/>
+
+                            <h:outputLabel value="#{i18n['common.surname']}:" for="apellidos" style="font-weight: bold;"/>
+                            <h:outputText id="apellidos" value="#{shoppingCartBean.order.customer.surname}"/>
+
+                            <h:outputLabel value="#{i18n['common.nif']}:" for="nif" style="font-weight: bold;"/>
+                            <h:outputText id="nif" value="#{shoppingCartBean.order.customer.nif}"/>
+
+                            <h:outputLabel value="#{i18n['common.address']}:" for="domicilio" style="font-weight: bold;"/>
+                            <h:outputText id="domicilio" value="#{shoppingCartBean.order.customer.address}"/>
+
+                            <h:outputLabel value="#{i18n['common.postal_code']}:" for="codPostal" style="font-weight: bold;"/>
+                            <h:outputText id="codPostal" value="#{shoppingCartBean.order.customer.postalCode}"/>
+                            
+                            <h:outputLabel value="#{i18n['common.telephone']}:" for="telefono" style="font-weight: bold;"/>
+                            <h:outputText id="telefono" value="#{shoppingCartBean.order.customer.telephone}"/>
+
+                            <h:outputLabel value="#{i18n['common.email']}:" for="email" style="font-weight: bold;"/>
+                            <h:outputText id="email" value="#{shoppingCartBean.order.customer.email}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dataPanel">
+                        <p> <h:outputText value="#{i18n['order.data']}" style="font-weight: bold;"/> </p>
+
+                        <h:panelGrid frame="box" border="1" columns="2">
+                            <h:outputLabel value="#{i18n['order.number']}:" for="numero" style="font-weight: bold;"/>
+                            <h:outputText id="numero" value="#{shoppingCartBean.order.id}"/>
+
+                            <h:outputLabel value="#{i18n['order.date']}:" for="fecha" style="font-weight: bold;"/>
+                            <h:outputText id="fecha" value="#{shoppingCartBean.order.date}">
+                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                            </h:outputText>
+
+                            <h:outputLabel value="#{i18n['order.total_amount']}:" for="total" style="font-weight: bold;"/>
+                            <h:outputText id="total" value="#{shoppingCartBean.order.totalOrder}">
+                                <f:convertNumber currencyCode="es"/>
+                            </h:outputText>
+
+                            <h:outputLabel value="#{i18n['order.status']}:" for="estado" style="font-weight: bold;"/>
+                            <h:outputText id="estado" value="#{shoppingCartBean.order.status}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dataPanel">
+                        <p> <h:outputText value="#{i18n['order.total_amount']}" style="font-weight: bold;"/> </p>
+
+                        <h:dataTable var="row" value="#{shoppingCartBean.order.orderRows}">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.number']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.cantidad}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.description']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.product.descripcion}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.brand']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.product.brand}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.model']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.product.model}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.price']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.price}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['product.discount']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.discount}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{i18n['order.product.amount']}"/>
+                                </f:facet>
+                                <h:outputText value="#{row.totalRow}"/>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:panelGroup>
+
+                    <h:commandButton value="#{i18n['product.follow_buy']}" immediate="true" action="products.xhtml"/>
+
+                </h:form>
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>
