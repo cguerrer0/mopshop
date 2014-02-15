@@ -12,15 +12,15 @@ import com.mopelo.common.domain.GenericEntity;
  * 
  * @author cguerrero
  */
-public interface GenericDao<BE extends GenericEntity> {
+public interface GenericDao<GE extends GenericEntity> {
 
 	/**
-	 * Create in database
+	 * Insert in database
 	 * 
 	 * @param entity
 	 * @return entity persisted
 	 */
-	Long create(BE entity);
+	Long insert(GE entity);
 
 	/**
 	 * Retrieve from database by id
@@ -28,14 +28,14 @@ public interface GenericDao<BE extends GenericEntity> {
 	 * @param id
 	 * @return
 	 */
-	BE retrieveById(Long id);
+	GE getById(Long id);
 
 	/**
 	 * Retrieve all entries from database
 	 * 
 	 * @return
 	 */
-	List<BE> retrieveAll();
+	List<GE> getAll();
 
 	/**
 	 * Update entity in database
@@ -44,7 +44,7 @@ public interface GenericDao<BE extends GenericEntity> {
 	 *            : entity to update
 	 * @return persisted entity
 	 */
-	BE update(BE entity);
+	GE update(GE entity);
 
 	/**
 	 * Delete from database by id

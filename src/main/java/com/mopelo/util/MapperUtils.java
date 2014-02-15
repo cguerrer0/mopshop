@@ -44,8 +44,8 @@ public final class MapperUtils {
 	 *            : destination entity class in list
 	 * @return list of destination class
 	 */
-	public static List<?> mapAsList(Iterable<?> source,
-			Class<?> destinationClass) {
+	public static <T,D> List<T> mapAsList(Iterable<D> source,
+			Class<T> destinationClass) {
 		return getMopeloMapper().mapAsList(source, destinationClass);
 	}
 
@@ -58,7 +58,7 @@ public final class MapperUtils {
 	 *            : type of the new object
 	 * @return new object
 	 */
-	public static Object map(Object source, Class<?> destinationClass) {
+	public static <T,D> T map( D source, Class<T> destinationClass) {
 		return getMopeloMapper().map(source, destinationClass);
 	}
 	

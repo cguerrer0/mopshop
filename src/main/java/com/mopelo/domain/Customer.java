@@ -41,7 +41,14 @@ public class Customer extends GenericEntity {
 
 
 
-    /**
+    public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+	/**
 	 * @return the name
 	 */
 	public String getName() {

@@ -5,7 +5,7 @@
   <cache />
   
   
-  <insert id="create" 
+<!--   <insert id="insert" 
   		  parameterType="com.mopelo.domain.Family" 
   		  useGeneratedKeys="true" 
   		  keyColumn="ID" 
@@ -15,13 +15,13 @@
   		HELLO_WORLD (FIRST_NAME,LAST_NAME)
   	VALUES 
   		(#{firstName},#{lastName})
-  	<!-- Generation of primary key. Database dependent -->
+  	Generation of primary key. Database dependent
    	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
          SELECT LAST_INSERT_ID();
     </selectKey> 
-  </insert>
+  </insert> -->
   
-  <select id="retrieveAll" resultType="com.mopelo.domain.Family">
+  <select id="getAll" resultType="com.mopelo.domain.Family">
     SELECT name, abbreviation      
     FROM FAMILY
   </select>

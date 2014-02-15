@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mopelo.dao.CustomerDao;
 import com.mopelo.dao.UserDao;
+import com.mopelo.domain.Customer;
 import com.mopelo.domain.User;
 import com.mopelo.service.CatalogService;
 import com.mopelo.service.UserService;
@@ -53,10 +54,11 @@ public class UserServiceImpl implements  UserService {
 	}
 	@Override
 	public CustomerDTO addNewCustomer(String login, String password,CustomerDTO customerData) {
-		UserDTO userAux= new UserDTO();
-		userAux.setLogin(login);
-		userAux.setPassword(password);
-		userDao.create((User)MapperUtils.map(userAux, User.class));
+		UserDTO userData= new UserDTO();
+		userData.setLogin(login);
+		userData.setPassword(password);
+		userDao.insert(MapperUtils.map(userData, User.class));
+		customerDao.insert(MapperUtils.map(customerData, Customer.class));
 		return null;
 	}
 	@Override

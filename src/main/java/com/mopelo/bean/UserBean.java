@@ -70,19 +70,14 @@ public class UserBean {
 	
 	public String doCreateUser(){
 		String surf = null;
-	
-		userService.addNewCustomer(login, password, currentCustomer);
 		newUser=false;
-		surf="clientPage";
-		
-		return surf+"?faces-redirect=true";
-		
+		userService.addNewCustomer(login, password, currentCustomer);
+		return surf;
 	}
 	
 	public String doUpdateUser(){
 		String surf = null;
 		surf="clientPage";
-		
 		return surf+"?faces-redirect=true";
 		
 	}

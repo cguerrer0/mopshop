@@ -8,12 +8,12 @@
 
 
 	<import resource="classpath:spring/spring-beans.xml" />
-	<import resource="classpath:spring/spring-persistence.xml" />
+	<import resource="classpath:spring/test-spring-persistence.xml" />
 
 	<!-- Resources -->
 	<context:property-placeholder
-		location="classpath:persistence/test-datasource.properties, 
-				  classpath:persistence/hibernate.properties"
+		location="classpath:persistence/test-datasource.properties,
+		classpath:persistence/test-mopelo.sql"
 		ignore-unresolvable="false" ignore-resource-not-found="true" />
 
 </beans>

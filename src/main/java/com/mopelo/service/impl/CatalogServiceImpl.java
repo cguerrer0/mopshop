@@ -53,9 +53,8 @@ public class CatalogServiceImpl implements  CatalogService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<ProductDTO> retrieveAllProducts() {
 		LoggerUtils.logStartMethod("retrieveAll");
-		List<Product> listEntities = productDao.retrieveAll();
-		@SuppressWarnings("unchecked")
-		List<ProductDTO> returnValue = (List<ProductDTO>) MapperUtils.mapAsList(listEntities, ProductDTO.class);
+		List<Product> listEntities = productDao.getAll();
+		List<ProductDTO> returnValue = MapperUtils.mapAsList(listEntities, ProductDTO.class);
 		LoggerUtils.logEndMethod("retrieveAll");
 		return returnValue;
 	}
@@ -67,9 +66,8 @@ public class CatalogServiceImpl implements  CatalogService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<FamilyDTO> retrieveAllFamilies() {
 		LoggerUtils.logStartMethod("retrieveAll");
-		List<Family> listEntities = familyDao.retrieveAll();
-		@SuppressWarnings("unchecked")
-		List<FamilyDTO> returnValue = (List<FamilyDTO>) MapperUtils.mapAsList(listEntities, FamilyDTO.class);
+		List<Family> listEntities = familyDao.getAll();
+		List<FamilyDTO> returnValue =  MapperUtils.mapAsList(listEntities, FamilyDTO.class);
 		LoggerUtils.logEndMethod("retrieveAll");
 		return returnValue;
 	}

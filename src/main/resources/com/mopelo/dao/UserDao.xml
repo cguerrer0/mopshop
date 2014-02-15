@@ -5,23 +5,23 @@
   <cache />
   
   
-  <insert id="create" 
+  <insert id="insert" 
   		  parameterType="com.mopelo.domain.User" 
   		  useGeneratedKeys="true" 
   		  keyColumn="ID" 
   		  keyProperty="id"
   		  >
   	INSERT INTO 
-  		HELLO_WORLD (FIRST_NAME,LAST_NAME)
+  		USER (login,password,date,lastAccess,typeUser)
   	VALUES 
-  		(#{firstName},#{lastName})
+  		(#{login},#{password},#{date},#{lastAccess},#{userType})
   	<!-- Generation of primary key. Database dependent -->
    	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
          SELECT LAST_INSERT_ID();
     </selectKey> 
   </insert>
   
-  <select id="retrieveAll" resultType="com.mopelo.domain.User">
+  <select id="getAll" resultType="com.mopelo.domain.User">
     SELECT
       ID AS id,
       LAST_NAME AS lastName,

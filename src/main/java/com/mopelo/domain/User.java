@@ -98,9 +98,6 @@ public class User  extends GenericEntity {
 	        return hash;
 	    }
 
-
-
-
 	    @Override
 	    public boolean equals(Object obj) {
 	        if (obj == null) {

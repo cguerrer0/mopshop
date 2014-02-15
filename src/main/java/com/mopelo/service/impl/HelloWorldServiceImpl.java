@@ -43,7 +43,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void create(HelloWorld entity) {
 		LoggerUtils.logStartMethod("create");
-		helloWorldDao.create(entity);
+		helloWorldDao.insert(entity);
 		LoggerUtils.logEndMethod("create");
 	}
 
@@ -51,7 +51,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<HelloWorldDTO> retrieveAll() {
 		LoggerUtils.logStartMethod("retrieveAll");
-		List<HelloWorld> listEntities = helloWorldDao.retrieveAll();
+		List<HelloWorld> listEntities = helloWorldDao.getAll();
 		@SuppressWarnings("unchecked")
 		List<HelloWorldDTO> returnValue = (List<HelloWorldDTO>) MapperUtils.mapAsList(listEntities, HelloWorldDTO.class);
 		LoggerUtils.logEndMethod("retrieveAll");

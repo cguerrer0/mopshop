@@ -39,7 +39,7 @@ public class HelloWorldDaoTest extends BaseDaoTest {
 
 	@Test
 	public void testRetrieveAll() {
-		List<HelloWorld> results = helloWorldDao.retrieveAll();
+		List<HelloWorld> results = helloWorldDao.getAll();
 		Assert.assertNotNull(results);
 		Assert.assertEquals(2, results.size());
 	}
