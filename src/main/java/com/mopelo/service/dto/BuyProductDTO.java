@@ -2,36 +2,42 @@ package com.mopelo.service.dto;
 
 import java.io.Serializable;
 
-import com.mopelo.domain.Product;
-
 public class BuyProductDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Product product;
-    private long number;
+	private ProductDTO product;
+	private long number;
 
-    
- 
-	public BuyProductDTO(Product product, long number) {
-		
+	public BuyProductDTO() {
+		super();
+	}
+
+	public BuyProductDTO(ProductDTO product, long number) {
+
 		this.product = product;
+		this.number = number;
+	}
+
+	public BuyProductDTO(ProductDTO productDTO, int number) {
+		product = productDTO;
 		this.number = number;
 	}
 
 	/**
 	 * @return the product
 	 */
-	public Product getProduct() {
+	public ProductDTO getProduct() {
 		return product;
 	}
 
 	/**
-	 * @param product the product to set
+	 * @param product
+	 *            the product to set
 	 */
-	public void setProduct(Product product) {
+	public void setProduct(ProductDTO product) {
 		this.product = product;
 	}
 
@@ -43,17 +49,18 @@ public class BuyProductDTO implements Serializable {
 	}
 
 	/**
-	 * @param number the number to set
+	 * @param number
+	 *            the number to set
 	 */
 	public void setNumber(long number) {
 		this.number = number;
 	}
 
 	public void increaseNumber(long inc) {
-        this.number += inc;
-    }
+		this.number += inc;
+	}
 
-    public void decreaseNumber(long dec) {
-        this.number -= dec;
-    }
+	public void decreaseNumber(long dec) {
+		this.number -= dec;
+	}
 }

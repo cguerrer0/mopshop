@@ -1,78 +1,103 @@
 package com.mopelo.bean;
 
-
-
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
+import com.mopelo.common.bean.GenericBean;
 import com.mopelo.service.BuyService;
 import com.mopelo.service.dto.BuyProductDTO;
 import com.mopelo.service.dto.OrderDTO;
 
 @ManagedBean
-public class ShoppingCartBean {
+@SessionScoped
+public class ShoppingCartBean extends GenericBean {
 
-	BuyProductDTO currentBuyProduct = null;
-	OrderDTO order = null;
+	BuyProductDTO currentBuyProduct;
+	OrderDTO order;
 	double totalAmount;
-	List<BuyProductDTO> products;
-	
-	
+
 	@ManagedProperty(value = "#{userBean}")
 	UserBean userBean;
-	
-    /**
-	 * {@link BuyService}
-	 */
+
 	@ManagedProperty(value = BuyService.EL_NAME)
 	private BuyService buyService;
-	
-	
-	public String doAddProduct (long id){
+
+	@PostConstruct
+	public void init() {
+		currentBuyProduct = null;
+		order = null;
+	}
+
+	public String doAddProduct(long idProduct) {
 		String surf = null;
-	    //we have to stay in the same page.
-		
+		buyService.addProduct(idProduct, 1);
+		totalAmount = buyService.calculateTotalAmount();
+		return surf + "?faces-redirect=true";
+	}
+
+	public String doDeleteProduct(long idProduct) {
+		String surf = null;
+		buyService.deleteProduct(idProduct);
+		totalAmount = buyService.calculateTotalAmount();
 		return surf;
 	}
-	public String doDeleteProduct (long id){
+
+	public String doUpdateShoppingCart() {
 		String surf = null;
-	    //we have to stay in the same page.
-		
-		return surf;
+		totalAmount = buyService.calculateTotalAmount();
+		return surf + "?faces-redirect=true";
+
 	}
-	public String doConfirmCart (long id){
+
+	public String doConfirmShoppingCart() {
 		String surf = null;
-	    //we have to stay in the same page.
-		
-		return surf;
+		if (userBean.getCurrentCustomer() == null) {
+			addErrorMessage("");// TODO you have to register
+		} else {
+			buyService.confirmShoppingCart();
+			order = buyService.createOrder(userBean.getCurrentCustomer());
+			surf = "completOrder";
+		}
+
+		return surf + "?faces-redirect=true";
 	}
-	public String doClearCart (long id){
+
+	public String doClearCart() {
 		String surf = null;
-	    //we have to stay in the same page.
-		
-		return surf;
+		surf = "products";
+		clearCart();
+		return surf + "?faces-redirect=true";
 	}
-	public String doIncNumber (long id){
+
+	private void clearCart() {
+		buyService.clearCart();
+		totalAmount = 0.0;
+
+	}
+
+	public String doIncNumber(long idProduct) {
 		String surf = null;
-	    //we have to stay in the same page.
-		
-		return surf;
+		buyService.modifyNumber(idProduct, 1, "INCREASE");
+		totalAmount = buyService.calculateTotalAmount();
+		return surf + "?faces-redirect=true";
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public String doDecNumber(long idProduct) {
+		String surf = null;
+		buyService.modifyNumber(idProduct, 1, "DECREASE");
+		totalAmount = buyService.calculateTotalAmount();
+		return surf + "?faces-redirect=true";
+	}
 
 	/**
 	 * @return the products
 	 */
 	public List<BuyProductDTO> getProducts() {
-		return (List<BuyProductDTO>) buyService.getShoppingCart();
+		return buyService.getShoppingCart();
 	}
 
 	/**
@@ -83,7 +108,8 @@ public class ShoppingCartBean {
 	}
 
 	/**
-	 * @param currentBuyProduct the currentBuyProduct to set
+	 * @param currentBuyProduct
+	 *            the currentBuyProduct to set
 	 */
 	public void setCurrentBuyProduct(BuyProductDTO currentBuyProduct) {
 		this.currentBuyProduct = currentBuyProduct;
@@ -97,7 +123,8 @@ public class ShoppingCartBean {
 	}
 
 	/**
-	 * @param order the order to set
+	 * @param order
+	 *            the order to set
 	 */
 	public void setOrder(OrderDTO order) {
 		this.order = order;
@@ -111,7 +138,8 @@ public class ShoppingCartBean {
 	}
 
 	/**
-	 * @param totalAmount the totalAmount to set
+	 * @param totalAmount
+	 *            the totalAmount to set
 	 */
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
@@ -125,25 +153,19 @@ public class ShoppingCartBean {
 	}
 
 	/**
-	 * @param userBean the userBean to set
+	 * @param userBean
+	 *            the userBean to set
 	 */
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
 	}
 
-
 	/**
-	 * @param buyService the buyService to set
+	 * @param buyService
+	 *            the buyService to set
 	 */
 	public void setBuyService(BuyService buyService) {
 		this.buyService = buyService;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

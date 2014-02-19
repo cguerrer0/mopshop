@@ -5,33 +5,61 @@
   <cache />
   
   
-  <insert id="create" 
+  <insert id="insert" 
   		  parameterType="com.mopelo.domain.Order" 
   		  useGeneratedKeys="true" 
-  		  keyColumn="ID" 
-  		  keyProperty="id"
-  		  >
+  		  keyColumn="id" 
+  		  keyProperty="id">
   	INSERT INTO 
-  		HELLO_WORLD (FIRST_NAME,LAST_NAME)
+  		ORDERS (date,status,idCustomer)
   	VALUES 
-  		(#{firstName},#{lastName})
-  	<!-- Generation of primary key. Database dependent -->
-   	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
-         SELECT LAST_INSERT_ID();
-    </selectKey> 
-  </insert>
+  		(#{date},#{status},#{customer.id})
+  		<selectKey keyProperty="id" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+   </insert>
+   
+
   
-  <select id="retrieveAll" resultType="com.mopelo.domain.Order">
-    SELECT
-      ID AS id,
-      LAST_NAME AS lastName,
-      FIRST_NAME AS firstName
-    FROM HELLO_WORLD
+  <insert id="insertOrderRow" parameterType="java.util.List">
+	INSERT INTO ORDER_ROW (idProduct, number,idOrder,discount,price) VALUES
+	<foreach collection="list" item="row" index="index" open="" separator=","  close="">
+	(#{row.product.id}, #{row.number},#{row.order.id},#{row.discount},#{row.price})
+	</foreach>
+	</insert>
+  
+  
+  <select id="getAll" resultType="com.mopelo.domain.Order">
+    SELECT date,status,idCustomer,idOrdRow
+    FROM ORDERS
   </select>
   
-<!--   update -->
+  <select id="getBrandWithOrder" resultType="String">
+		SELECT P.BRAND from  PRODUCT P, ORDER_ROW O
+		WHERE P.id = O.idProduct
+		GROUP BY P.BRAND
+
+  </select>
+   
+    <resultMap  id="entry" type="com.mopelo.util.Entry" >
+	  <result   property="key"  column="k" />
+	  <result   property="value"  column="v" />
+  </resultMap> 
   
-  
-<!--   deleteById -->
+    <select id="getFamiliesWithOrder" resultMap="entry">
+		SELECT SUM(O.NUMBER) as v,F.name as k from  FAMILY F, ORDER_ROW O,PRODUCT P
+		WHERE F.id = P.idFamily
+        AND P.id = O.idProduct	
+        GROUP BY  F.name
+  </select>
+   
+   <select id="getNumberProductByBrandAndFamily" resultMap="entry">
+	SELECT SUM(O.NUMBER) as v, F.name as k
+		FROM ORDER_ROW O, PRODUCT P, FAMILY F
+		WHERE P.id = O.idProduct
+        AND F.id = P.idFamily
+		AND P.BRAND = #{brand}
+		GROUP BY  F.name
+   </select> 
   
 </mapper>

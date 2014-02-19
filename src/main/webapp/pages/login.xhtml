@@ -1,43 +1,41 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich">
 
-    <body>
+<body>
 
-       	<ui:composition template="/pages/template/layout.xhtml">
+	<ui:composition template="/pages/template/layout.xhtml">
 
-        
-            <ui:define name="content">
-             <rich:panel styleClass="rich-panel">
-                <h:form>
-                
-                   <rich:panel  >
-			        <f:facet name="header">
-			            <h:outputText value="#{i18n['common.login']}" />
-			        </f:facet>
-                        <h:outputLabel value="#{i18n['login.access_register_user']} :" for="login"/>
-                        <h:inputText id="login" value="#{userBean.login }"/>
+		<ui:define name="content">
+			<br></br>
+			<h:form>
+				<rich:panel styleClass="rich-panel">
 
-                        <h:outputLabel value="#{i18n['common.password']}:" for="password"/>
-                        <h:inputSecret id="password" value="#{userBean.password}"/>
+					<rich:panel>
+						<f:facet name="header">
+							<h:outputText value="#{i18n['common.login']}" />
+						</f:facet>
 
-                  </rich:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{i18n['login.access_register_user']} :" for="login" style="font-weight: bold;" />
+							<h:inputText id="login" value="#{userBean.login }" />
 
-                    <h:panelGrid columns="2">
-                        <h:commandButton value="#{i18n['common.access']}" action="#{userBean.doLogin}" />
-                        <h:commandButton value="#{i18n['common.cancel']}" action="products.xhtml" />
-                    </h:panelGrid>
+							<h:outputLabel value="#{i18n['common.password']}:" for="password" style="font-weight: bold;" />
+							<h:inputSecret id="password" value="#{userBean.password}" />
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:commandButton value="#{i18n['common.access']}" action="#{userBean.doLogin}" />
+							<h:commandButton value="#{i18n['common.cancel']}" action="products.xhtml" />
+						</h:panelGrid>
+					</rich:panel>
 
-                    <p> <h:commandLink value="#{i18n['user.create_user']}" action="#{userBean.doNewUser}"/> </p>
-                </h:form>
-                </rich:panel>
-            </ui:define>
+				</rich:panel>
+			</h:form>
 
-        </ui:composition>
+		</ui:define>
 
-    </body>
+	</ui:composition>
+
+</body>
 </html>

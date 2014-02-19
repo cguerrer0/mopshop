@@ -2,36 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mopelo.dao.UserDao">
 
-  <cache />
-  
-  
-  <insert id="insert" 
-  		  parameterType="com.mopelo.domain.User" 
-  		  useGeneratedKeys="true" 
-  		  keyColumn="ID" 
-  		  keyProperty="id"
-  		  >
-  	INSERT INTO 
-  		USER (login,password,date,lastAccess,typeUser)
-  	VALUES 
-  		(#{login},#{password},#{date},#{lastAccess},#{userType})
-  	<!-- Generation of primary key. Database dependent -->
-   	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
-         SELECT LAST_INSERT_ID();
-    </selectKey> 
-  </insert>
-  
-  <select id="getAll" resultType="com.mopelo.domain.User">
-    SELECT
-      ID AS id,
-      LAST_NAME AS lastName,
-      FIRST_NAME AS firstName
-    FROM HELLO_WORLD
-  </select>
-  
-<!--   update -->
-  
-  
-<!--   deleteById -->
-  
+	<cache />
+
+
+	<insert id="insert" parameterType="com.mopelo.domain.User"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO
+		USER (login,password,date,lastAccess,typeUser)
+		VALUES
+		(#{login},#{password},#{date},#{lastAccess},#{userType})
+		<selectKey keyProperty="id" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<select id="getAll" resultType="com.mopelo.domain.User">
+		SELECT
+		ID AS id,
+		LAST_NAME AS lastName,
+		FIRST_NAME AS firstName
+		FROM HELLO_WORLDd
+	</select>
+
+	<select id="getUserByLogin" parameterType="String"
+		resultType="com.mopelo.domain.User">
+		SELECT id,login,password, lastAccess, typeUser
+		FROM USER WHERE login = #{login}
+	</select>
+
+	<select id="getById" parameterType="long" resultType="com.mopelo.domain.User">
+		SELECT id,login,password, lastAccess, typeUser
+		FROM USER WHERE
+		id = #{id}
+	</select>
+
+	<!-- update -->
+	<update id="update" parameterType="com.mopelo.domain.User">
+		UPDATE USER SET login= #{login},password = #{password},date = #{date},
+		lastAccess = #{lastAccess}, typeUser = #{userType}
+		WHERE id = #{id}
+	</update>
+
+	<!-- deleteById -->
+	<delete id="deleteById" parameterType="long">
+		DELETE FROM USER WHERE id = #{id}
+	</delete>
+
+
 </mapper>

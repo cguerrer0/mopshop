@@ -5,225 +5,175 @@ import java.util.List;
 import java.util.Vector;
 
 import com.mopelo.common.dto.GenericDTO;
+import com.mopelo.domain.OrderStatus;
+import com.mopelo.util.LoggerUtils;
+
 /**
  * 
  * @author guerrero
- *
+ * 
  */
 public class OrderDTO extends GenericDTO {
-	
-	
 
 	private static final long serialVersionUID = 1L;
-	  
-	    
-	    private CustomerDTO customer;
-	    private Date date;
-	    private OrderStatusDTO status;
-	    // Operaciones en cascada a traves de la relacion 1:N
-	    // Carga retardada (LAZY) de la lista de LineaPedido
-	    //    se cargará al hacer el getLineasPedido (pero sólo desde un EJB)
-	    private List<OrderRowDTO> lineRows;
 
-	    private Double totalPedido;  // No se almacena en BD
+	private CustomerDTO customer;
+	private Date date;
+	private OrderStatusDTO status;
+	private List<OrderRowDTO> lineRows;
 
+	private Double totalOrder; // No se almacena en BD
 
+	public OrderDTO() {
+		super();
+	}
 
-	   
-	    public OrderDTO() {
-			super();
-			// TODO Auto-generated constructor stub
+	public OrderDTO(CustomerDTO customer, Date date, OrderStatusDTO status) {
+		super();
+		this.customer = customer;
+		this.date = date;
+		this.status = status;
+		this.lineRows = new Vector<OrderRowDTO>();
+		this.totalOrder = 0.0;
+	}
+
+	public OrderDTO(Long id) {
+		super(id);
+		this.totalOrder = 0.0;
+	}
+
+	public OrderDTO(CustomerDTO customer, Date date, OrderStatusDTO status,
+			List<OrderRowDTO> lineRows) {
+		this(customer, date, status);
+		this.lineRows = lineRows;
+		this.totalOrder = addTotalRows();
+	}
+
+	public OrderDTO(CustomerDTO customer2, Date time, OrderStatus inprocess) {
+	}
+
+	private Double addTotalRows() {
+		double suma = 0;
+		for (OrderRowDTO row : lineRows) {
+			suma += row.getTotalRow();
 		}
 
+		return (suma);
+	}
 
-
-
-
-		public OrderDTO(CustomerDTO customer, Date date, OrderStatusDTO status) {
-			super();
-			this.customer = customer;
-			this.date = date;
-			this.status = status;
-			this.lineRows = new Vector<OrderRowDTO>();
-	        this.totalPedido = 0.0;
+	public void anadirLineaPedido(OrderRowDTO row) {
+		if (this.lineRows == null) {
+			LoggerUtils.logDebug("order rows is null");
 		}
 
-
-
-
-
-		public OrderDTO(Long id) {
-			super(id);
-			this.totalPedido = 0.0;
-		}
-	
-	    public OrderDTO(CustomerDTO customer, Date date,
-				OrderStatusDTO status, List<OrderRowDTO> lineRows) {
-			this(customer,date,status);
-			this.lineRows = lineRows;
-			this.totalPedido = addTotalRows();
+		if (row == null) {
+			LoggerUtils.logDebug("row is null");
 		}
 
-	   
+		this.lineRows.add(row);
+		this.totalOrder += row.getTotalRow();
+	}
 
-	    private Double addTotalRows(){
-	        double suma = 0;
-	        for (OrderRowDTO row: lineRows){
-	            suma += row.getTotalRow();
-	        }
+	/**
+	 * @return the customer
+	 */
+	public CustomerDTO getCustomer() {
+		return customer;
+	}
 
-	        return (suma);
-	    }
+	/**
+	 * @param customer
+	 *            the customer to set
+	 */
+	public void setCustomer(CustomerDTO customer) {
+		this.customer = customer;
+	}
 
-	    public void anadirLineaPedido(OrderRowDTO row){
-	        if (this.lineRows == null){
-	            System.err.println("order rows is null");
-	        }
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
 
-	        if (row == null){
-	        System.err.println("row is null");
-	        }
+	/**
+	 * @param date
+	 *            the date to set
+	 */
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-	        this.lineRows.add(row);
-	        this.totalPedido += row.getTotalRow();
-	    }
+	/**
+	 * @return the status
+	 */
+	public OrderStatusDTO getStatus() {
+		return status;
+	}
 
+	/**
+	 * @param status
+	 *            the status to set
+	 */
+	public void setStatus(OrderStatusDTO status) {
+		this.status = status;
+	}
 
+	/**
+	 * @return the lineRows
+	 */
+	public List<OrderRowDTO> getLineRows() {
+		return lineRows;
+	}
 
-	    /**
-		 * @return the customer
-		 */
-		public CustomerDTO getCustomer() {
-			return customer;
+	/**
+	 * @param lineRows
+	 *            the lineRows to set
+	 */
+	public void setLineRows(List<OrderRowDTO> lineRows) {
+		this.lineRows = lineRows;
+	}
+
+	/**
+	 * @return the totalOrder
+	 */
+	public Double getTotalOrder() {
+		return totalOrder;
+	}
+
+	/**
+	 * @param totalOrder
+	 *            the totalOrder to set
+	 */
+	public void setTotalOrder(Double totalOrder) {
+		this.totalOrder = totalOrder;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (this.getId() != null ? this.getId().hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		
+		if (!(object instanceof OrderDTO)) {
+			return false;
 		}
-
-
-
-
-
-		/**
-		 * @param customer the customer to set
-		 */
-		public void setCustomer(CustomerDTO customer) {
-			this.customer = customer;
+		OrderDTO other = (OrderDTO) object;
+		if ((this.getId() == null && other.getId() != null)
+				|| (this.getId() != null && !this.getId().equals(other.getId()))) {
+			return false;
 		}
+		return true;
+	}
 
-
-
-
-
-		/**
-		 * @return the date
-		 */
-		public Date getDate() {
-			return date;
-		}
-
-
-
-
-
-		/**
-		 * @param date the date to set
-		 */
-		public void setDate(Date date) {
-			this.date = date;
-		}
-
-
-
-
-
-		/**
-		 * @return the status
-		 */
-		public OrderStatusDTO getStatus() {
-			return status;
-		}
-
-
-
-
-
-		/**
-		 * @param status the status to set
-		 */
-		public void setStatus(OrderStatusDTO status) {
-			this.status = status;
-		}
-
-
-
-
-
-		/**
-		 * @return the lineRows
-		 */
-		public List<OrderRowDTO> getLineRows() {
-			return lineRows;
-		}
-
-
-
-
-
-		/**
-		 * @param lineRows the lineRows to set
-		 */
-		public void setLineRows(List<OrderRowDTO> lineRows) {
-			this.lineRows = lineRows;
-		}
-
-
-
-
-
-		/**
-		 * @return the totalPedido
-		 */
-		public Double getTotalPedido() {
-			return totalPedido;
-		}
-
-
-
-
-
-		/**
-		 * @param totalPedido the totalPedido to set
-		 */
-		public void setTotalPedido(Double totalPedido) {
-			this.totalPedido = totalPedido;
-		}
-
-
-
-
-
-		@Override
-	    public int hashCode() {
-	        int hash = 0;
-	        hash += (this.getId() != null ? this.getId().hashCode() : 0);
-	        return hash;
-	    }
-
-	    @Override
-	    public boolean equals(Object object) {
-	        // TODO: Warning - this method won't work in the case the id fields are not set
-	        if (!(object instanceof OrderDTO)) {
-	            return false;
-	        }
-	        OrderDTO other = (OrderDTO) object;
-	        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.getId().equals(other.getId()))) {
-	            return false;
-	        }
-	        return true;
-	    }
-
-	    @Override
-	    public String toString() {
-	        return "ORDER[id="+this.getId()+"customer:"+this.customer.getId()+",date:"+this.date.toString()+"]";
-	    }
-
+	@Override
+	public String toString() {
+		return "ORDER[id=" + this.getId() + "customer:" + this.customer.getId()
+				+ ",date:" + this.date.toString() + "]";
+	}
 
 }

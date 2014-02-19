@@ -3,166 +3,173 @@ package com.mopelo.domain;
 import com.mopelo.common.domain.GenericEntity;
 
 public class Product extends GenericEntity {
-	  public Product(Long id) {
+	public Product(Long id) {
 		super(id);
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	private static final long serialVersionUID = 1L;
-	
-	    private String  description;
-	    private String  detail;
-	    private Double  price;
-	    private Integer stock;
-	    private String  brand;
-	    private String  model;
-	    private Family family;
 
-	   
+	private String description;
+	private String detail;
+	private Double price;
+	private Integer stock;
+	private String brand;
+	private String model;
+	private Family family;
 
-	    /**
-		 * @return the description
-		 */
-		public String getDescription() {
-			return description;
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the detail
+	 */
+	public String getDetail() {
+		return detail;
+	}
+
+	/**
+	 * @param detail
+	 *            the detail to set
+	 */
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	/**
+	 * @return the price
+	 */
+	public Double getPrice() {
+		return price;
+	}
+
+	/**
+	 * @param price
+	 *            the price to set
+	 */
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	/**
+	 * @return the stock
+	 */
+	public Integer getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock
+	 *            the stock to set
+	 */
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	/**
+	 * @return the brand
+	 */
+	public String getBrand() {
+		return brand;
+	}
+
+	/**
+	 * @param brand
+	 *            the brand to set
+	 */
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	/**
+	 * @return the model
+	 */
+	public String getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model
+	 *            the model to set
+	 */
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	/**
+	 * @return the family
+	 */
+	public Family getFamily() {
+		return family;
+	}
+
+	/**
+	 * @param family
+	 *            the family to set
+	 */
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
 		}
-
-		/**
-		 * @param description the description to set
-		 */
-		public void setDescription(String description) {
-			this.description = description;
+		if (getClass() != obj.getClass()) {
+			return false;
 		}
-
-		/**
-		 * @return the detail
-		 */
-		public String getDetail() {
-			return detail;
+		final Product other = (Product) obj;
+		if (this.getId() != other.getId()
+				&& (this.getId() == null || !this.getId().equals(other.getId()))) {
+			return false;
 		}
-
-		/**
-		 * @param detail the detail to set
-		 */
-		public void setDetail(String detail) {
-			this.detail = detail;
+		if ((this.description == null) ? (other.description != null)
+				: !this.description.equals(other.description)) {
+			return false;
 		}
-
-		/**
-		 * @return the price
-		 */
-		public Double getPrice() {
-			return price;
+		if ((this.detail == null) ? (other.detail != null) : !this.detail
+				.equals(other.detail)) {
+			return false;
 		}
-
-		/**
-		 * @param price the price to set
-		 */
-		public void setPrice(Double price) {
-			this.price = price;
+		if (this.price != other.price
+				&& (this.price == null || !this.price.equals(other.price))) {
+			return false;
 		}
-
-		/**
-		 * @return the stock
-		 */
-		public Integer getStock() {
-			return stock;
+		if (this.stock != other.stock) {
+			return false;
 		}
+		return true;
+	}
 
-		/**
-		 * @param stock the stock to set
-		 */
-		public void setStock(Integer stock) {
-			this.stock = stock;
-		}
+	@Override
+	public String toString() {
+		return "PRODUCT[id:" + this.getId() + ",descrip:" + this.description
+				+ ",precio:" + this.price + "]";
+	}
 
-		/**
-		 * @return the brand
-		 */
-		public String getBrand() {
-			return brand;
-		}
-
-		/**
-		 * @param brand the brand to set
-		 */
-		public void setBrand(String brand) {
-			this.brand = brand;
-		}
-
-		/**
-		 * @return the model
-		 */
-		public String getModel() {
-			return model;
-		}
-
-		/**
-		 * @param model the model to set
-		 */
-		public void setModel(String model) {
-			this.model = model;
-		}
-		
-
-	    /**
-		 * @return the family
-		 */
-		public Family getFamily() {
-			return family;
-		}
-
-		/**
-		 * @param family the family to set
-		 */
-		public void setFamily(Family family) {
-			this.family = family;
-		}
-
-		@Override
-	    public boolean equals(Object obj) {
-	        if (obj == null) {
-	            return false;
-	        }
-	        if (getClass() != obj.getClass()) {
-	            return false;
-	        }
-	        final Product other = (Product) obj;
-	        if (this.getId() != other.getId() && (this.getId() == null || !this.getId().equals(other.getId()))) {
-	            return false;
-	        }
-	        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-	            return false;
-	        }
-	        if ((this.detail == null) ? (other.detail != null) : !this.detail.equals(other.detail)) {
-	            return false;
-	        }
-	        if (this.price != other.price && (this.price == null || !this.price.equals(other.price))) {
-	            return false;
-	        }
-	        if (this.stock != other.stock) {
-	            return false;
-	        }
-	        return true;
-	    }
-
-
-		@Override
-	    public String toString() {
-	        return "PRODUCT[id:"+this.getId()+",descrip:"+this.description+",precio:"+this.price+"]";
-	    }
-
-
-
-	    @Override
-	    public int hashCode() {
-	        int hash = 3;
-	        hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-	        return hash;
-	    }
-
-
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 59 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
+		return hash;
+	}
 
 }

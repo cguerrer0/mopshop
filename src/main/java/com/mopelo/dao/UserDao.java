@@ -13,4 +13,6 @@ import com.mopelo.domain.User;
  */
 public interface UserDao extends GenericDao<User> {
 
+	User getUserByLogin(String login);
+
 }

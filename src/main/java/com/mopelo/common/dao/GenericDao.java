@@ -42,9 +42,9 @@ public interface GenericDao<GE extends GenericEntity> {
 	 * 
 	 * @param entity
 	 *            : entity to update
-	 * @return persisted entity
+	 * 
 	 */
-	GE update(GE entity);
+	void update(GE entity);
 
 	/**
 	 * Delete from database by id

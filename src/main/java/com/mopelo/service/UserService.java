@@ -3,35 +3,27 @@ package com.mopelo.service;
 import com.mopelo.dao.CustomerDao;
 import com.mopelo.dao.UserDao;
 import com.mopelo.service.dto.CustomerDTO;
+import com.mopelo.service.dto.UserDTO;
 
 public interface UserService {
-	
-	/**
-	 * Bean name.
-	 */
+
 	static String BEAN_NAME = "userService";
 
-	/**
-	 * El name.
-	 */
 	static String EL_NAME = "#{userService}";
-	
-	
-    boolean checkUser(String login, String password);
 
-    CustomerDTO getCustomer(String login);
+	boolean checkUser(String login, String password);
 
-    CustomerDTO addNewCustomer(String login, String password, CustomerDTO customerData);
+	CustomerDTO getCustomer(String login);
 
-    //Cliente actualizarDatosCliente(Cliente datosCliente);
+	CustomerDTO addNewCustomer(String login, String password,
+			CustomerDTO customerData);
 
-    //Usuario actualizarPassword(long idUsuario, String password);
+	UserDTO updateLastAccess(long idUser);
 
-    boolean existUser(String login);
+	boolean existUser(String login);
 
-    //SUser actualizarUltimoAcceso(long idUsuario);
-    
-    void setUserDao(UserDao userDao);
-    void setCustomerDao(CustomerDao customerDao);
+	void setUserDao(UserDao userDao);
+
+	void setCustomerDao(CustomerDao customerDao);
 
 }

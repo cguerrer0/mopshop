@@ -10,9 +10,4 @@
 	<import resource="classpath:spring/spring-beans.xml" />
 	<import resource="classpath:spring/spring-persistence.xml" />
 
-	<!-- Resources 
-	<context:property-placeholder
-		location="classpath:persistence/datasource.properties"
-		ignore-unresolvable="false" ignore-resource-not-found="true" />-->
-
 </beans>

@@ -1,12 +1,9 @@
-/**
- * 
- */
 package com.mopelo.common.domain;
 
 import java.io.Serializable;
 
 /**
- * Business Entity
+ * GenericEntity
  * 
  * @author cguerrero
  */
@@ -43,8 +40,6 @@ public abstract class GenericEntity implements Serializable {
 	}
 
 	public GenericEntity() {
-		// TODO Auto-generated constructor stub
 	}
-	
 
 }

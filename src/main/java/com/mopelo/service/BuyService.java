@@ -2,48 +2,35 @@ package com.mopelo.service;
 
 import java.util.List;
 
+import com.googlecode.wickedcharts.highcharts.options.Options;
 import com.mopelo.service.dto.BuyProductDTO;
+import com.mopelo.service.dto.CustomerDTO;
 import com.mopelo.service.dto.OrderDTO;
 
-
 public interface BuyService {
-	/**
-	 * Bean name.
-	 */
+	
 	static String BEAN_NAME = "buyService";
 
-	/**
-	 * El name.
-	 */
 	static String EL_NAME = "#{buyService}";
 
+	void initShoppingCart();
 
+	void addProduct(long idProduct, long number);
 
-    void initShoppingCart();
+	void modifyNumber(long idProduct, long number, String operation);
 
-    void addProduct(long idProduct, long number);
+	void clearCart();
 
-    void decreaseNumber(long idProduct, long number);
+	void confirmShoppingCart();
 
-    void incrementarCantidad(long idProduct, long number);
+	void deleteProduct(long idProduct);
 
-    void clearCart();
+	OrderDTO createOrder(CustomerDTO customerDTO);
 
-    //void confirmarCarro() throws ExcepcionExistencias;
+	List<BuyProductDTO> getShoppingCart();
 
-    void deleteProduct(long idProduct);
+	double calculateTotalAmount();
 
-    void updateNumber(long idProduct, long newNumber);
-
-   //boolean productoDisponible(long idProducto, long cantidad);
-
-    //void establecerCliente(long idCliente);
-
-    OrderDTO createOrder();
-
-    List<BuyProductDTO> getShoppingCart();
-
-    double calcularImporteTotal();
-
+	Options createComboOption();
 
 }

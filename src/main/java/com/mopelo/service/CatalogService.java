@@ -5,29 +5,28 @@ import java.util.List;
 import com.mopelo.service.dto.FamilyDTO;
 import com.mopelo.service.dto.ProductDTO;
 
-
 public interface CatalogService {
-	/**
-	 * Bean name.
-	 */
+	
 	static String BEAN_NAME = "catalogService";
 
-	/**
-	 * El name.
-	 */
 	static String EL_NAME = "#{catalogService}";
 
 
+	List<ProductDTO> getAllProducts();
+
+	List<FamilyDTO> getAllFamilies();
+
 	/**
-	 * Retrieve all products.
-	 * 
+	 * Get a list of Product using as a condition the field and the value.
+	 * @param field String with the name of the column to query for
+	 * (Could be DESCRIPTION, FAMILY, BRAND)
+	 * @param value String with the value to query for
 	 * @return
 	 */
-	List<ProductDTO> retrieveAllProducts();
-	/**
-	 * Retrieves all families.
-	 * @return
-	 */
-	List<FamilyDTO> retrieveAllFamilies();
+	List<ProductDTO> getProductBy(String field, Object value);
+
+	FamilyDTO getFamilyById(long idFamily);
+
+	ProductDTO getProductById(long idProduct);
 
 }

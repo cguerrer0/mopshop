@@ -1,135 +1,108 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:rich="http://richfaces.org/rich">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:rich="http://richfaces.org/rich">
 
 <body>
 
 	<ui:composition template="/pages/template/layout.xhtml">
-				<ui:define name="content">
-				<h:form>
-					<rich:panel styleClass="rich-panel">
-					  
-						<c:choose>
-							<c:when test="#{userBean.newUser}">
+		<ui:define name="content">
+			<h:form>
+
+				<rich:panel styleClass="rich-panel">
+
+					<c:choose>
+						<c:when test="#{userBean.newUser}">
 							<f:facet name="header">
-									<h:outputText value="#{i18n['client.add_customer']}" />
-								</f:facet>
-							</c:when>
-							<c:otherwise>
+								<h:outputText value="#{i18n['client.add_customer']}" />
+							</f:facet>
+						</c:when>
+						<c:otherwise>
 							<f:facet name="header">
-									<h:outputText value="#{i18n['client.perfil_page']}" />
-									<h:outputText value="#{userBean.currentCustomer.name}" />
-								</f:facet>
-							</c:otherwise>
-							
-						</c:choose>
-						 <h:messages layout="table" />
-					
-					
+								<h:outputText value="#{i18n['client.perfil_page']} " />
+								<h:outputText value="#{userBean.currentCustomer.name}" />
+																
+							</f:facet>
+						</c:otherwise>
+
+					</c:choose>
+					<h:messages layout="table" />
+
 					<br></br>
-					<rich:panel  style="width:100%" >
-			     	<f:facet name="header">
-			            <h:outputText value="#{i18n['client.conection_data']}" />
-			      </f:facet>
-						<h:panelGrid  border="1" columns="2">
+
+					<rich:panel>
+						<f:facet name="header">
+							<h:outputText value="#{i18n['client.conection_data']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
 							<c:choose>
 								<c:when test="#{userBean.newUser}">
-									<h:outputLabel value="#{i18n['common.login']} (*):" for="login"
-										style="font-weight: bold;" />
-									<h:inputText id="login" value="#{userBean.login}"
-										required="true"
-										requiredMessage="#{i18n['client.error_empty']}" />
+									<h:outputLabel value="#{i18n['common.login']} (*):" for="login" style="font-weight: bold;" />
+									<h:inputText id="login" value="#{userBean.login}" required="true" requiredMessage="#{i18n['client.error_empty']}" />
 								</c:when>
 								<c:otherwise>
-									<h:outputLabel value="#{i18n['common.login']}:" for="login"
-										style="font-weight: bold;" />
-									<h:inputText id="login" readonly="true"
-										value="#{userBean.currentUser.login}" />
+									<h:outputLabel value="#{i18n['common.login']}:" for="login" style="font-weight: bold;" />
+									<h:inputText id="login" readonly="true" value="#{userBean.currentUser.login}" />
 								</c:otherwise>
 							</c:choose>
 
-							<h:outputLabel value="#{i18n['common.password']} (*):"
-								for="password" style="font-weight: bold;" />
-							<h:inputSecret id="password" value="#{userBean.password}"
-								required="true" requiredMessage="#{i18n['client.error_empty']}" />
+							<h:outputLabel value="#{i18n['common.password']} (*):" for="password" style="font-weight: bold;" />
+							<h:inputSecret id="password" value="#{userBean.password}" required="true" requiredMessage="#{i18n['client.error_empty']}" />
 
-							<h:outputLabel value="#{i18n['client.repeat_password']}(*):"
-								for="password2" style="font-weight: bold;" />
-							<h:inputSecret id="password2" value="#{userBean.password2}"
-								required="true" requiredMessage="#{i18n['client.error_empty']}" />
+							<h:outputLabel value="#{i18n['client.repeat_password']}(*):" for="password2" style="font-weight: bold;" />
+							<h:inputSecret id="password2" value="#{userBean.password2}" required="true" requiredMessage="#{i18n['client.error_empty']}" />
 
 						</h:panelGrid>
-				    </rich:panel>
-				    <br></br>
-				    <rich:panel style="width:100%" >
-			       	<f:facet name="header">
-			            <h:outputText value="#{i18n['client.data']}" />
-					</f:facet>
-							<h:panelGrid  columns="2">
-							<h:outputLabel value="#{i18n['commun.name']}(*):" for="nombre"
-								style="font-weight: bold;" />
-							<rich:inplaceInput id="nombre"  defaultLabel="#{i18n['common.click_to_enter_your']} #{i18n['commun.name']}" value="#{userBean.currentCustomer.name}"
-								required="true" requiredMessage="#{i18n['client.error_empty']}" />
+					</rich:panel>
 
-							<h:outputLabel value="#{i18n['common.surname']}(*):"
-								for="apellidos" style="font-weight: bold;" />
-							<rich:inplaceInput id="apellidos" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.surname}"
-								value="#{userBean.currentCustomer.surname}" required="true"
+					<br></br>
+
+					<rich:panel>
+						<f:facet name="header">
+							<h:outputText value="#{i18n['client.data']}" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{i18n['commun.name']}(*):" for="nombre" style="font-weight: bold;" />
+							<rich:inplaceInput id="nombre" defaultLabel="#{i18n['common.click_to_enter_your']} #{i18n['commun.name']}" value="#{userBean.currentCustomer.name}" required="true"
 								requiredMessage="#{i18n['client.error_empty']}" />
 
-							<h:outputLabel value="#{i18n['common.nif']}(*):" for="nif"
-								style="font-weight: bold;" />
-							<rich:inplaceInput id="nif" value="#{userBean.currentCustomer.nif}" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.nif}"
+							<h:outputLabel value="#{i18n['common.surname']}(*):" for="apellidos" style="font-weight: bold;" />
+							<rich:inplaceInput id="apellidos" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.surname}" value="#{userBean.currentCustomer.surname}"
 								required="true" requiredMessage="#{i18n['client.error_empty']}" />
 
-							<h:outputLabel value="#{i18n['common.address']}:" for="domicilio"
-								style="font-weight: bold;" />
-							<rich:inplaceInput id="domicilio" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.address}"
-								value="#{userBean.currentCustomer.address}" />
+							<h:outputLabel value="#{i18n['common.nif']}(*):" for="nif" style="font-weight: bold;" />
+							<rich:inplaceInput id="nif" value="#{userBean.currentCustomer.nif}" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.nif}" required="true"
+								requiredMessage="#{i18n['client.error_empty']}" />
 
-							<h:outputLabel value="#{i18n['common.postal_code']}:"
-								for="codPostal" style="font-weight: bold;" />
-							<rich:inplaceInput id="codPostal" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.postalCode}"
-								value="#{userBean.currentCustomer.postalCode}" />
+							<h:outputLabel value="#{i18n['common.address']}:" for="domicilio" style="font-weight: bold;" />
+							<rich:inplaceInput id="domicilio" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.address}" value="#{userBean.currentCustomer.address}" />
 
-							<h:outputLabel value="#{i18n['common.telephone']}:"
-								for="telefono" style="font-weight: bold;" />
-							<rich:inplaceInput id="telefono" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.telephone}"
-								value="#{userBean.currentCustomer.telephone}" />
+							<h:outputLabel value="#{i18n['common.postal_code']}:" for="codPostal" style="font-weight: bold;" />
+							<rich:inplaceInput id="codPostal" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.postalCode}" value="#{userBean.currentCustomer.postalCode}" />
 
-							<h:outputLabel value="#{i18n['common.email']}(*):" for="email"
-								style="font-weight: bold;" />
+							<h:outputLabel value="#{i18n['common.telephone']}:" for="telefono" style="font-weight: bold;" />
+							<rich:inplaceInput id="telefono" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.telephone}" value="#{userBean.currentCustomer.telephone}" />
+
+							<h:outputLabel value="#{i18n['common.email']}(*):" for="email" style="font-weight: bold;" />
 							<rich:inplaceInput id="email" value="#{userBean.currentCustomer.email}" defaultLabel="#{i18n['common.click_to_enter_your']} #{userBean.currentCustomer.email}"
 								required="true" requiredMessage="#{i18n['client.error_empty']}" />
 
 						</h:panelGrid>
-				</rich:panel>
+					</rich:panel>
 
-
-				<h:panelGrid columns="2">
-
+					<h:panelGrid columns="2">
 						<c:choose>
 							<c:when test="#{userBean.newUser}">
-								<h:commandButton action="#{userBean.doCreateUser()}"
-									value="#{i18n['user.create_user']}" />
+								<h:commandButton action="#{userBean.doCreateUser}" value="#{i18n['user.create_user']}" />
 							</c:when>
 							<c:otherwise>
-								<h:commandButton action="#{userBean.doUpdateUser()}"
-									value="#{i18n['user.update_user']}" />
+								<h:commandButton action="#{userBean.doUpdateUser}" value="#{i18n['user.update_user']}" />
 							</c:otherwise>
 						</c:choose>
-
-					</h:panelGrid> 
-					</rich:panel>
-				</h:form>
-			
+					</h:panelGrid>
+				</rich:panel>
+			</h:form>
 		</ui:define>
 	</ui:composition>
-
 </body>
 </html>

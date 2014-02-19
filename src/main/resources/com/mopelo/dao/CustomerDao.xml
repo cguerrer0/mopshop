@@ -2,36 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mopelo.dao.CustomerDao">
 
-  <cache />
-  
-  
-  <insert id="insert" 
-  		  parameterType="com.mopelo.domain.Customer" 
-  		  useGeneratedKeys="true" 
-  		  keyColumn="ID" 
-  		  keyProperty="id"
-  		  >
-  	INSERT INTO 
-  		CUSTOMER (name,surname, nif, address, postalCode, email, telephone)
-  	VALUES 
-  		(#{name},#{surname},#{nif},#{address},#{postalCode},#{email},#{telephone})
-  	<!-- Generation of primary key. Database dependent -->
-   	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
-         SELECT LAST_INSERT_ID();
-    </selectKey> 
-  </insert>
-  
-  <select id="getAll" resultType="com.mopelo.domain.Customer">
-    SELECT
-      ID AS id,
-      LAST_NAME AS lastName,
-      FIRST_NAME AS firstName
-    FROM HELLO_WORLD
-  </select>
-  
-<!--   update -->
-  
-  
-<!--   deleteById -->
-  
+	<cache />
+
+
+	<insert id="insert" parameterType="com.mopelo.domain.Customer"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO
+		CUSTOMER (name,surname, nif, address, postalCode, email, telephone,idUser)
+		VALUES
+		(#{name},#{surname},#{nif},#{address},#{postalCode},#{email},#{telephone},#{user.id})
+		<!-- Generation of primary key. Database dependent -->
+		<selectKey keyProperty="id" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<resultMap type="com.mopelo.domain.Customer" id="resultCustomer">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="surname" column="surname" />
+		<result property="nif" column="nif" />
+		<result property="address" column="address" />
+		<result property="postalCode" column="postalCode" />
+		<result property="email" column="email" />
+		<result property="telephone" column="telephone" />
+
+		<association property="user" column="idUser"
+			javaType="com.mopelo.domain.User" select="selectUser"></association>
+	</resultMap>
+
+	<select id="getAll" resultMap="resultCustomer">
+		SELECT id,name, surname, nif, address, postalCode, email, telephone
+		FROM CUSTOMER
+	</select>
+
+	<select id="selectUser" parameterType="long" resultType="com.mopelo.domain.User">
+		SELECT id,login, password, lastAccess FROM USER WHERE id = #{idUser}
+	</select>
+
+	<select id="getCustomerByLogin" parameterType="String"
+		resultMap="resultCustomer">
+		SELECT c.id,c.name, c.surname, c.nif, c.address, c.postalCode, c.email,
+		c.telephone, c.idUser
+		FROM CUSTOMER c, USER u
+		WHERE c.idUser = u.id
+		AND u.login = #{login}
+	</select>
+
+	<select id="getById" parameterType="long" resultType="com.mopelo.domain.Product">
+		SELECT id,name, surname, nif, address, postalCode, email, telephone
+		FROM CUSTOMER
+		WHERE id = #{id}
+	</select>
+
+
 </mapper>

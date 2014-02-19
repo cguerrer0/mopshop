@@ -9,12 +9,12 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 
 import com.mopelo.domain.Customer;
 import com.mopelo.domain.Family;
-import com.mopelo.domain.HelloWorld;
+import com.mopelo.domain.OrderRow;
 import com.mopelo.domain.Product;
 import com.mopelo.domain.User;
 import com.mopelo.service.dto.CustomerDTO;
 import com.mopelo.service.dto.FamilyDTO;
-import com.mopelo.service.dto.HelloWorldDTO;
+import com.mopelo.service.dto.OrderRowDTO;
 import com.mopelo.service.dto.ProductDTO;
 import com.mopelo.service.dto.UserDTO;
 
@@ -27,18 +27,6 @@ public class MopeloMapper extends ConfigurableMapper {
 
 	@Override
 	public void configure(MapperFactory mapperFactory) {
-		// register class maps, Mappers, ObjectFactories, and Converters
-		mapperFactory.registerClassMap(mapperFactory
-				.classMap(HelloWorld.class, HelloWorldDTO.class)
-				.field("lastName", "lastName").field("firstName", "firstName")
-				.toClassMap());
-
-		// register class maps, Mappers, ObjectFactories, and Converters
-		mapperFactory.registerClassMap(mapperFactory
-				.classMap(HelloWorldDTO.class, HelloWorld.class)
-
-				.field("lastName", "lastName").field("firstName", "firstName")
-				.toClassMap());
 
 		// mapper Product.
 		mapperFactory.registerClassMap(mapperFactory
@@ -47,7 +35,7 @@ public class MopeloMapper extends ConfigurableMapper {
 				.field("price", "price").field("stock", "stock")
 				.field("brand", "brand").field("model", "model").toClassMap());
 
-		// register class maps, Mappers, ObjectFactories, and Converters
+		// mapper Product.
 		mapperFactory.registerClassMap(mapperFactory
 				.classMap(ProductDTO.class, Product.class).field("id", "id")
 				.field("description", "description").field("detail", "detail")
@@ -56,47 +44,59 @@ public class MopeloMapper extends ConfigurableMapper {
 
 		// mapper Family
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(Family.class, FamilyDTO.class)
-				// .field("id", "id")
+				.classMap(Family.class, FamilyDTO.class).field("id", "id")
 				.field("name", "name").field("abbreviation", "abbreviation")
 				.toClassMap());
 
-		// register class maps, Mappers, ObjectFactories, and Converters
+		// mapper Family
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(FamilyDTO.class, Family.class)
-				// .field("id", "id")
+				.classMap(FamilyDTO.class, Family.class).field("id", "id")
 				.field("name", "name").field("abbreviation", "abbreviation")
 				.toClassMap());
 
 		// mapper user
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(User.class, UserDTO.class)
+				.classMap(User.class, UserDTO.class).field("id", "id")
 				.field("login", "login").field("password", "password")
 				.field("date", "date").field("lastAccess", "lastAccess")
 				.field("userType", "userType").toClassMap());
 
-		// register class maps, Mappers, ObjectFactories, and Converters
+		// mapper user
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(UserDTO.class, User.class)
+				.classMap(UserDTO.class, User.class).field("id", "id")
 				.field("login", "login").field("password", "password")
 				.field("date", "date").field("lastAccess", "lastAccess")
 				.field("userType", "userType").toClassMap());
-		
+
 		// mapper customer
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(Customer.class,CustomerDTO.class)
+				.classMap(Customer.class, CustomerDTO.class).field("id", "id")
 				.field("name", "name").field("surname", "surname")
 				.field("nif", "nif").field("address", "address")
 				.field("postalCode", "postalCode").field("email", "email")
 				.field("telephone", "telephone").toClassMap());
 
-		// register class maps, Mappers, ObjectFactories, and Converters
+		// mapper customer
 		mapperFactory.registerClassMap(mapperFactory
-				.classMap(CustomerDTO.class, Customer.class)
+				.classMap(CustomerDTO.class, Customer.class).field("id", "id")
 				.field("name", "name").field("surname", "surname")
 				.field("nif", "nif").field("address", "address")
 				.field("postalCode", "postalCode").field("email", "email")
 				.field("telephone", "telephone").toClassMap());
+
+		// mapper order
+		mapperFactory.registerClassMap(mapperFactory
+				.classMap(OrderRow.class, OrderRowDTO.class).field("id", "id")
+				.field("number", "number").field("price", "price")
+				.field("product", "product").field("order", "order")
+				.field("discount", "discount").toClassMap());
+
+		// mapper order
+		mapperFactory.registerClassMap(mapperFactory
+				.classMap(OrderRowDTO.class, OrderRow.class).field("id", "id")
+				.field("number", "number").field("price", "price")
+				.field("product", "product").field("order", "order")
+				.field("discount", "discount").toClassMap());
 	}
 
 	@Override

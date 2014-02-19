@@ -16,7 +16,8 @@ public final class LoggerUtils {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(LoggerUtils.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoggerUtils.class);
 
 	/**
 	 * Log debug.

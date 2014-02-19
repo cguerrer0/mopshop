@@ -8,10 +8,8 @@ package com.mopelo.domain;
 /**
  * 
  * @author guerrero
- *
+ * 
  */
 public enum OrderStatus {
-    INPROCESS,
-    COMMITTED,
-    CANCEL
+	INPROCESS, CONFIRMED, CANCEL
 }

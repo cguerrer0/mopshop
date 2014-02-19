@@ -8,10 +8,8 @@ package com.mopelo.service.dto;
 /**
  * 
  * @author guerrero
- *
+ * 
  */
 public enum OrderStatusDTO {
-    INPROCESS,
-    COMMITTED,
-    CANCEL
+	INPROCESS, CONFIRMED, CANCEL
 }

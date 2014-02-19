@@ -7,39 +7,41 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:rich="http://richfaces.org/rich">
     <ui:composition>
+     <br></br>
       <rich:panel >
         <h:form>
+	    	
             <rich:panel >
              <f:facet name="header">
-            <h:outputText value="Buscar producto"/> 
+            <h:outputText value="#{i18n['common.search_product']}"/> 
             </f:facet>
             <h:inputText size="20" value="#{catalogBean.checkDescription}"/>
-            <h:commandButton value="Buscar" action="#{catalogBean.doSearchDescription}"/>
+            <h:commandButton value="#{i18n['common.search']}" action="#{catalogBean.doSearchDescription}"/>
             </rich:panel>
             <br></br>
               <rich:panel >
             <f:facet name="header">
-           <h:outputText value="Buscar marca"/> 
+           <h:outputText value="#{i18n['common.search_brand']}"/> 
             </f:facet>
             <h:inputText size="20" value="#{catalogBean.checkBrand}"/>
-            <h:commandButton value="Buscar" action="#{catalogBean.doSearchBrand}"/>
+            <h:commandButton value="#{i18n['common.search']}" action="#{catalogBean.doSearchBrand}"/>
             <p>
                 <h:commandLink action="#{catalogBean.doSearchAll}">
-                    <h:outputText value="Ver todos los productos"/>
+                    <h:outputText value="#{i18n['common.see_all_products']}"/>
                 </h:commandLink>
             </p>
             </rich:panel>
              <br></br>
             <rich:panel >
              <f:facet name="header">
-            <h:outputText value="Ver por Familias"/> 
+            <h:outputText value="#{i18n['common.see_by_family']}"/> 
             </f:facet>
             <ul>
                 <c:forEach var="family" items="#{catalogBean.families}">
                     <li>
                         <h:commandLink action="#{catalogBean.doSelectFamily}">
                             <h:outputText value="#{family.name}"/>
-                            <f:param name="idFamilia" value="#{family.id}"/>
+                            <f:param name="idFamily" value="#{family.id}"/>
                         </h:commandLink>
                     </li>
                 </c:forEach>

@@ -7,39 +7,21 @@ import java.io.Serializable;
 import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-/**
- * Header controller
- * 
- * @author cguerrero
- */
 @ManagedBean
-@SessionScoped
 public class LocaleBean implements Serializable {
-	
+
 	/**
 	 * Serial UID.
 	 */
-    private static final long serialVersionUID = -7522609234232367231L;
-
-	/* ************************************ */
-	/* Dependencies */
-	/* ************************************ */
-
-	/* ************************************ */
-	/* Attributes */
-	/* ************************************ */
+	private static final long serialVersionUID = -7522609234232367231L;
 
 	/**
 	 * Locale.
 	 */
-	private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-
-	/* ************************************ */
-	/* Methods */
-	/* ************************************ */
+	private Locale locale = FacesContext.getCurrentInstance().getViewRoot()
+			.getLocale();
 
 	/**
 	 * Set language.
@@ -47,14 +29,13 @@ public class LocaleBean implements Serializable {
 	 * @param language
 	 *            : new language
 	 */
-	public void setLanguage(String language) {
+	public String setLanguage(String language) {
 		locale = new Locale(language);
 		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+
+		return "product" + "?faces-redirect=true";
 	}
 
-	/* ************************************ */
-	/* Getters & Setters */
-	/* ************************************ */
 
 	/**
 	 * @return the locale

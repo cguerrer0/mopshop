@@ -3,10 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich">
     <body>
 	    <ui:composition>
-			<h1><h:outputText value="#{i18n['footer']}" /></h1>
+	    	<rich:toolbar height="26" itemSeparator="grid">
+				<h:outputText style="aling:left;"  value="#{i18n['footer']}" />
+			</rich:toolbar>
 	    </ui:composition>
     </body>
 </html>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	   xmlns:tx="http://www.springframework.org/schema/tx"
-	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   					   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	   					   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 
-	<!-- <jdbc:embedded-database id="dataSource">
-		<jdbc:script location="classpath:persistence/schema-hsqldb.sql"/>
-	</jdbc:embedded-database> -->
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://localhost:3306/mopshop"/>
-      <property name="username" value="root"/>
-      <property name="password" value=""/>
-    </bean>
+	<!-- DataSource -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/mopshop" />
+		<property name="username" value="mopelo" />
+		<property name="password" value="mopelo" />
+	</bean>
 
 	<!-- MyBatis -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -24,7 +22,8 @@
 	</bean>
 
 	<!-- Transaction manager -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

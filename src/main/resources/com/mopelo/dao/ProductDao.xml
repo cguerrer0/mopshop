@@ -2,36 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mopelo.dao.ProductDao">
 
-  <cache />
-  
-  
-  <insert id="create" 
-  		  parameterType="com.mopelo.domain.Product" 
-  		  useGeneratedKeys="true" 
-  		  keyColumn="ID" 
-  		  keyProperty="id"
-  		  >
-  	INSERT INTO 
-  		HELLO_WORLD (FIRST_NAME,LAST_NAME)
-  	VALUES 
-  		(#{firstName},#{lastName})
-  	<!-- Generation of primary key. Database dependent -->
-   	<selectKey keyProperty="id" resultType="long" order="AFTER"> 
-         SELECT LAST_INSERT_ID();
-    </selectKey> 
-  </insert>
-  
-  <select id="retrieveAll" resultType="com.mopelo.domain.Product">
-    SELECT
-      ID AS id,
-      LAST_NAME AS lastName,
-      FIRST_NAME AS firstName
-    FROM HELLO_WORLD
-  </select>
-  
-<!--   update -->
-  
-  
-<!--   deleteById -->
-  
+	<cache />
+
+
+	<insert id="insert" parameterType="com.mopelo.domain.Product"
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO PRODUCT
+		(id, description, detail, price, stock, brand, model)
+		VALUES
+		(#{id},#{ description},#{ detail},#{ price},#{ stock},#{ brand},#{ model})
+		<!-- Generation of primary key. Database dependent -->
+		<selectKey keyProperty="id" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<select id="getAll" resultType="com.mopelo.domain.Product">
+		SELECT id, description, detail, price, stock, brand, model
+		FROM PRODUCT
+	</select>
+
+
+	<select id="getById" parameterType="long" resultType="com.mopelo.domain.Product">
+		SELECT id, description, detail, price, stock, brand, model
+		FROM PRODUCT
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByFieldValue" parameterType="map"
+		resultType="com.mopelo.domain.Product">
+		SELECT id, description, detail, price, stock, brand, model
+		FROM PRODUCT
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test=" field == 'BRAND' ">
+				brand = #{value}
+			</if>
+			<if test="field == 'DESCRIPTION'">
+				description like '%'|| #{value} ||'%'
+			</if>
+			<if test="field == 'FAMILY'">
+				idFamily = #{value}
+			</if>
+		</trim>
+	</select>
+
+	<update id="update" parameterType="com.mopelo.domain.Product">
+		UPDATE PRODUCT SET id = #{id}, description = #{
+		description}, detail = #{detail}, price = #{price},stock = #{stock},brand = #{brand}, model = #{model}
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="long">
+		DELETE FROM PRODUCT WHERE id
+		= #{id}
+	</delete>
+
 </mapper>

@@ -16,9 +16,6 @@ import com.mopelo.mapper.MopeloMapper;
  */
 public final class MapperUtils {
 
-	/* ************************************************************** */
-	/* Dependencies */
-	/* ************************************************************** */
 
 	/**
 	 * Mapper.
@@ -26,7 +23,7 @@ public final class MapperUtils {
 	private static MapperFacade mopeloMapper;
 
 	/**
-	 * @return the  Mapper
+	 * @return the Mapper
 	 */
 	private static MapperFacade getMopeloMapper() {
 		if (mopeloMapper == null) {
@@ -44,7 +41,7 @@ public final class MapperUtils {
 	 *            : destination entity class in list
 	 * @return list of destination class
 	 */
-	public static <T,D> List<T> mapAsList(Iterable<D> source,
+	public static <T, D> List<T> mapAsList(Iterable<D> source,
 			Class<T> destinationClass) {
 		return getMopeloMapper().mapAsList(source, destinationClass);
 	}
@@ -58,10 +55,8 @@ public final class MapperUtils {
 	 *            : type of the new object
 	 * @return new object
 	 */
-	public static <T,D> T map( D source, Class<T> destinationClass) {
+	public static <T, D> T map(D source, Class<T> destinationClass) {
 		return getMopeloMapper().map(source, destinationClass);
 	}
-	
-
 
 }
